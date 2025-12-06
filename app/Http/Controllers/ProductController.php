@@ -2,18 +2,48 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     public function index()
     {
-        $products = [
-            ['name' => 'Ikan Tuna Segar', 'image' => 'https://via.placeholder.com/300x200?text=Tuna+Segar'],
-            ['name' => 'Ikan Kakap Merah', 'image' => 'https://via.placeholder.com/300x200?text=Kakap+Merah'],
-            ['name' => 'Udang Vaname', 'image' => 'https://via.placeholder.com/300x200?text=Udang+Vaname'],
-            ['name' => 'Cumi-Cumi Segar', 'image' => 'https://via.placeholder.com/300x200?text=Cumi+Segar'],
-        ];
-        return view('products.index', compact('products'));
+        $products = Product::all();
+        return view('admin.produk.index', compact('products'));
+    }
+
+    public function create()
+    {
+       return view('admin.produk.create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nama' => 'required',
+            'stok' => 'required',
+            'harga' => 'required',
+            'gambar' => 'image'
+        ]);
+
+        $gambar = $request->file('gambar')->store('produk', 'public');
+
+        Product::create([
+            'nama' => $request->nama,
+            'stok' => $request->stok,
+            'harga' => $request->harga,
+            'gambar' => $gambar
+        ]);
+
+        return redirect()->route('admin.produk.index')->with('success', 'Produk berhasil ditambahkan');
+    }
+
+    public function destroy($id)
+    {
+        $product = Product::findOrFail($id);
+        $product->delete();
+
+        return back();
     }
 }

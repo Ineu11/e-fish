@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\Order;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,13 +17,17 @@ class AuthenticatedSessionController extends Controller
         return view('auth.login');
     }
 
-    public function store(LoginRequest $request): RedirectResponse
+    public function store(LoginRequest $request)
 {
-    $request->authenticate();
+        $request->authenticate();
+        $request->session()->regenerate();
 
-    $request->session()->regenerate();
+        if (auth()->user()->role === 'admin') {
 
-    return redirect()->intended('/welcome'); // 👈 GANTI INI
+            return redirect()->route('admin.dashboard');
+        }
+
+        return redirect('/welcome');
 }
 
     public function destroy(Request $request): RedirectResponse
@@ -33,6 +38,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect()->route('login');
     }
 }
