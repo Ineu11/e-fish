@@ -55,4 +55,5 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/order/{id}', [OrderController::class, 'create'])->name('order.create');
     Route::post('/order', [OrderController::class, 'store'])->name('order.store');
+    Route::get('/pesanan-saya', [OrderController::class, 'myOrders'])->name('order.my');
 });

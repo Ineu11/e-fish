@@ -15,7 +15,33 @@ class ProductController extends Controller
 
     public function create()
     {
-       return view('admin.produk.create');
+        return view('admin.produk.create');
+    }
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nama' => 'required',
+            'stok' => 'required|numeric',
+            'harga' => 'required|numeric',
+            'gambar' => 'image|max:2048'
+        ]);
+
+        $product = Product::findOrFail($id);
+
+        $data = [
+            'nama' => $request->nama,
+            'stok' => $request->stok,
+            'harga' => $request->harga,
+        ];
+
+        if ($request->hasFile('gambar')) {
+            $gambarBaru = $request->file('gambar')->store('produk', 'public');
+            $data['gambar'] = $gambarBaru;
+        }
+
+        $product->update($data);
+
+        return redirect()->route('admin.produk.index')->with('success', 'Produk berhasil diperbarui');
     }
 
     public function store(Request $request)
@@ -44,6 +70,6 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $product->delete();
 
-        return back();
+        return back()->with('success', 'Produk berhasil Dihapus');
     }
 }

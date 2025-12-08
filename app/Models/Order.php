@@ -13,12 +13,13 @@ class Order extends Model
         'product_id',
         'qty',
         'alamat',
+        'total_harga',
         'no_wa',
         'status',
     ];
     public function product()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class, 'product_id');
     }
     public function user()
     {

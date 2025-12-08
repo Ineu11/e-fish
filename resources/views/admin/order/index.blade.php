@@ -22,7 +22,7 @@
     @csrf
     <button type="submit"
       class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg shadow-md">
-      Keluar
+     <i class="fa fa-sign-out" aria-hidden="true"></i> Keluar
     </button>
   </form>
 </header>
@@ -51,7 +51,7 @@
       <tr class="border-b border-gray-200 hover:bg-gray-50">
         <td class="p-3 font-medium">{{ $order->user->name }}</td>
         <td class="p-3">{{ $order->product->nama }}</td>
-        <td class="p-3">{{ $order->qty }}</td>
+        <td class="p-3">{{ $order->qty }} Kg</td>
         <td class="p-3 text-blue-600 font-semibold">Rp {{ number_format($order->total_harga, 0, ',', '.') }}</td>
         <td class="p-3">{{ $order->no_wa }}</td>
         <td class="p-3">{{ $order->alamat }}</td>

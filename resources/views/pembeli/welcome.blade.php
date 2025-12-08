@@ -1,9 +1,9 @@
 <!-- content.blade.php -->
 @extends('layouts.app')
 @section('content')
+
     <!-- HERO SECTION -->
-    <!-- HERO SECTION WITH BACKGROUND SLIDER -->
-    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
 
         <!-- Background Slides -->
         <div id="sliderBg" class="absolute inset-0 bg-cover bg-center transition-all duration-[1500ms]">
@@ -45,44 +45,37 @@
             index = (index + 1) % images.length;
         }
 
-        // Inisialisasi pertama
         changeBg();
-
         // Ganti gambar setiap 4 detik
         setInterval(changeBg, 4000);
     </script>
 
     <!-- TENTANG KAMI -->
-    <section id="tentang" class="py-20 bg-gray-100">
+    <section id="tentang" class="min-h-screen py-20 bg-gray-100">
         <div class="max-w-5xl mx-auto px-4 text-center">
 
-            <!-- Title Oceanea + Icon -->
             <div class="flex justify-center items-center mb-4">
                 <span class="tracking-[0.4em] uppercase text-blue-400 font-semibold text-sm">
                     E - F I S H
                 </span>
             </div>
 
-            <!-- Icon ikan + garis -->
             <div class="flex justify-center items-center mb-10">
                 <div class="w-24 h-px bg-blue-300"></div>
                 <img src="icon-fish.png" class="mx-3 w-8 opacity-80">
                 <div class="w-24 h-px bg-blue-300"></div>
             </div>
 
-            <!-- Title -->
             <h2 class="text-2xl md:text-3xl font-extrabold mb-10 text-gray-800">
                 TENTANG KAMI
             </h2>
 
-            <!-- 3 Rounded Images -->
             <div class="flex flex-col md:flex-row justify-center items-center gap-8 mb-10">
-                <img src="img1.jpg" class="w-40 h-40 object-cover rounded-full shadow-md">
-                <img src="img2.jpg" class="w-40 h-40 object-cover rounded-full shadow-md">
-                <img src="img3.jpg" class="w-40 h-40 object-cover rounded-full shadow-md">
+                <img src="{{ asset('asset-img/bg-ikan1.jpeg') }}" class="w-40 h-40 object-cover rounded-full shadow-md">
+                <img src="{{ asset('asset-img/bg-ikan2.jpeg') }}" class="w-40 h-40 object-cover rounded-full shadow-md">
+                <img src="{{ asset('asset-img/bg-ikan3.jpeg') }}" class="w-40 h-40 object-cover rounded-full shadow-md">
             </div>
 
-            <!-- Paragraph -->
             <p class="text-gray-700 leading-relaxed max-w-3xl mx-auto text-sm md:text-base">
                 Kami adalah platform yang menghubungkan petani ikan lokal dengan pelanggan yang mencari ikan segar dan
                 berkualitas.
@@ -99,7 +92,7 @@
 
 
     <!-- VISI MISI -->
-    <section class="py-20 bg-blue-100">
+    <section class="min-h-screen py-20 bg-blue-100">
         <div class="max-w-6xl mx-auto px-4">
 
             <!-- VISI -->
@@ -117,8 +110,12 @@
 
                 <!-- Images -->
                 <div class="flex gap-6 justify-center md:justify-end">
-                    <div class="w-44 h-44 bg-gray-300 rounded-lg shadow"></div>
-                    <div class="w-44 h-44 bg-gray-300 rounded-lg shadow"></div>
+                    <div class="w-44 h-44 bg-gray-300 rounded-lg shadow">
+                        <img class="w-44 h-44 rounded-lg shadow" src="{{ asset('asset-img/bg-ikan1.jpeg') }}" alt="">
+                    </div>
+                    <div class="w-44 h-44 bg-gray-300 rounded-lg shadow">
+                        <img class="w-44 h-44 rounded-lg shadow" src="{{ asset('asset-img/bg-ikan2.jpeg') }}" alt="">
+                    </div>
                 </div>
 
             </div>
@@ -129,8 +126,12 @@
 
                 <!-- Images -->
                 <div class="flex gap-6 justify-center md:justify-start">
-                    <div class="w-44 h-44 bg-gray-300 rounded-lg shadow"></div>
-                    <div class="w-44 h-44 bg-gray-300 rounded-lg shadow"></div>
+                    <div class="w-44 h-44 bg-gray-300 rounded-lg shadow">
+                        <img class="w-44 h-44 rounded-lg shadow" src="{{ asset('asset-img/bg-ikan3.jpeg') }}" alt="">
+                    </div>
+                    <div class="w-44 h-44 bg-gray-300 rounded-lg shadow">
+                        <img class="w-44 h-44 rounded-lg shadow" src="{{ asset('asset-img/bg-ikan1.jpeg') }}" alt="">
+                    </div>
                 </div>
 
                 <!-- Text -->
@@ -153,7 +154,7 @@
 
 
     <!-- LAYANAN KAMI -->
-    <section id="layanan" class="py-20 bg-gray-50">
+    <section id="layanan" class="min-h-screen py-20 bg-gray-50">
         <div class="max-w-6xl mx-auto px-4 text-center">
             <h2 class="text-3xl font-extrabold mb-14 tracking-wide">LAYANAN KAMI</h2>
 
@@ -221,7 +222,7 @@
 
 
     <!-- GALERI -->
-    <section id="galeri" class="py-20 bg-blue-100">
+    <section id="galeri" class="py-20 min-h-screen bg-blue-100">
         <div class="max-w-6xl mx-auto px-4 text-center">
 
             <!-- TITLE -->
@@ -251,13 +252,14 @@
                                 </svg>
                                 <p class="font-bold text-lg">{{ $product->nama }}</p>
                             </div>
+                            <p class="text-sm text-gray-600 mb-3">Stok : {{ $product->stok }} Kg</p>
                             <p class="text-sm text-gray-600 mb-3">Rp {{ number_format($product->harga, 0, ',', '.') }} /Kg</p>
                         </div>
 
                         <a href="/order/{{ $product->id }}"
-                            class="w-full mt-2 bg-blue-600 text-white py-2 rounded-lg
+                            class="w-full mt-2 bg-blue-600 text-white px-2 py-2 rounded-lg
              hover:bg-blue-700 hover:-translate-y-1 transition-all duration-300">
-                            Order Now
+                            <i class="fa fa-shopping-cart"></i> Order Now
                         </a>
                     </div>
                 @endforeach

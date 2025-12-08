@@ -17,11 +17,23 @@ class OrderController extends Controller
             ->get();
         return view('admin.order.index', compact('orders'));
     }
+    public function myOrders()
+    {
+        $orders = Order::where('user_id', auth()->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('pembeli.order.index', compact('orders'));
+    }
     public function create($id)
     {
         $product = Product::findOrFail($id);
         $user = auth()->user();
-        return view('pembeli.order', compact('product', 'user'));
+        $orders = Order::with('product')
+            ->where('user_id', auth()->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('pembeli.order', compact('product', 'user', 'orders'));
     }
     
     public function store(Request $request)
