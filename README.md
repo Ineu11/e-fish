@@ -1,89 +1,3 @@
-🐟 E Fish Marketplace
-
-E Fish adalah aplikasi marketplace pemesanan ikan segar. Sistem menghubungkan pembeli dengan penyedia ikan. Aplikasi ini dibangun menggunakan Laravel framework dan dilengkapi dashboard admin untuk memantau transaksi dan mengelola produk.
-
-✨ Fitur Utama
-👥 Multi User Role
-
-Pembeli. Cari produk ikan. Lihat detail. Pesan. Pantau status pesanan
-
-Admin. Kelola produk. Kelola pesanan. Analisis riwayat transaksi dan data penjualan
-
-🛍️ Fitur Pembeli
-
-Registrasi dan login
-
-Jelajahi katalog produk
-
-Tambah pesanan
-
-Lihat total dan status pesanan
-
-Riwayat transaksi
-
-🧑‍💼 Fitur Admin
-
-Kelola produk. Tambah. Edit. Hapus
-
-Kelola dan ubah status pesanan
-
-Dashboard insight penjualan
-
-Lihat dan filter riwayat pesanan selesai atau dibatalkan
-
-🚀 Teknologi
-
-Laravel 10
-
-PHP 8.2
-
-MySQL
-
-TailwindCSS
-
-Blade Template
-
-⚙️ Instalasi
-
-Clone repository
-
-git clone [url-repository]
-cd e-fish
-
-
-Install dependencies
-
-composer install
-
-
-Copy environment dan generate key
-
-cp .env.example .env
-php artisan key:generate
-
-
-Konfigurasi database di file .env
-
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=efish
-DB_USERNAME=root
-DB_PASSWORD=
-
-
-Migrasi database
-
-php artisan migrate
-
-
-Jalankan aplikasi
-
-php artisan serve
-
-
-Aplikasi berjalan pada http://localhost:8000
-
 ## 📝 ERD Database
 
 ```mermaid
@@ -125,6 +39,8 @@ erDiagram
     Products ||--o{ OrderItems : referenced
 
 
+
+```markdown
 ## 📄 LRS Logical Record Structure
 
 ### Tabel Users
@@ -152,7 +68,7 @@ erDiagram
 | user_id | INT FK users.id | Relasi ke user pemesan |
 | total | INT | Total harga pesanan |
 | status | ENUM(pending, diproses, selesai, dibatalkan) | Status pesanan |
-| created_at | TIMESTAMP | Tanggal pesanan dibuat |
+| created_at | TIMESTAMP | Tanggal dibuat |
 
 ### Tabel OrderItems
 | Field | Type | Description |
@@ -161,41 +77,4 @@ erDiagram
 | order_id | INT FK orders.id | Relasi ke pesanan |
 | product_id | INT FK products.id | Relasi ke produk |
 | qty | INT | Jumlah |
-| subtotal | INT | Total harga per item |
-
-📷 Modul Aplikasi
-Halaman Publik
-
-Landing page menampilkan daftar produk
-
-Area Pembeli
-
-Dashboard pesanan
-
-Buat pesanan dan lihat riwayat
-
-Area Admin
-
-Dashboard admin insight penjualan
-
-Kelola produk dan stok
-
-Kelola status pesanan
-
-👥 Tim Pengembang
-Developer
-
-Fullstack. Azwul
-
-Pembimbing
-
-Dosen Pembimbing. Bapak Haerul Fatah M.Kom
-
-Program Studi. Sistem Informasi
-
-Universitas Bina Sarana Informatika
-
-📄 Lisensi
-
-Hak Cipta © 2025 E Fish Marketplace
-Lisensi MIT
+| subtotal | INT | Total per item |
