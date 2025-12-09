@@ -37,7 +37,7 @@ erDiagram
     Users ||--o{ Orders : has
     Orders ||--o{ OrderItems : contains
     Products ||--o{ OrderItems : referenced
-
+```
 
 
 ```markdown
@@ -78,3 +78,4 @@ erDiagram
 | product_id | INT FK products.id | Relasi ke produk |
 | qty | INT | Jumlah |
 | subtotal | INT | Total per item |
+```
